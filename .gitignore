@@ -4,11 +4,9 @@
 *.war
 *.class
 *.db
-*.sql
 *.h2.*
 *.csv
 *.properties
-*.xml
 *.json
 
 # IntelliJ IDEA
