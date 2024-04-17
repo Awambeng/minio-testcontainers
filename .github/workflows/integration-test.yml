@@ -1,0 +1,37 @@
+name: Integration Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v1
+        with:
+          java-version: 21
+
+      - name: Set up Podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman
+
+      - name: Configure Podman for integration tests
+        run: |
+          echo "[registries.search]" | sudo tee -a /etc/containers/registries.conf
+          echo "registries=['docker.io']" | sudo tee -a /etc/containers/registries.conf
+
+      - name: Set environmental variables
+        run: |
+          echo "DOCKER_HOST=unix://${XDG_RUNTIME_DIR}/podman/podman.sock" >> $GITHUB_ENV
+          echo "TESTCONTAINERS_RYUK_DISABLED=true" >> $GITHUB_ENV
+
+      - name: Build and test with Maven (Integration Tests)
+        run: mvn test -Pintegration-tests

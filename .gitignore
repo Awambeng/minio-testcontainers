@@ -1,0 +1,41 @@
+# Spring Boot
+*.log
+*.jar
+*.war
+*.class
+*.db
+*.sql
+*.h2.*
+*.csv
+*.properties
+*.xml
+*.json
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# User-specific settings
+.mvn/
+.jvmci/
+
+# Native image
+target/native-image/
+
+# Other
+node_modules/
+npm-debug.log
